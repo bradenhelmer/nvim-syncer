@@ -1,6 +1,9 @@
 # nvim-syncer
 This plugin leverages rsync to provide automatic syncing of host and remote directories. 
 ## Usage
+### Dependencies
+- rsync
+- ssh
 ### Installation
 Use any whatever plugin manager you would like.<br>
 ### Setup
