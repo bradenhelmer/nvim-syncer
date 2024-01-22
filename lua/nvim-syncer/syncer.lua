@@ -38,7 +38,7 @@ function syncer.sync_up(opts)
 		return false
 	end
 
-	local command = "rsync -varz --delete"
+	local command = "rsync -varz "
 	if opts.excludes then
 		command = command .. construct_excludes(opts.excludes)
 	end
@@ -53,7 +53,7 @@ function syncer.sync_down(opts)
 		return false
 	end
 
-	local command = "rsync -varz --delete"
+	local command = "rsync -varz "
 	if opts.excludes then
 		command = command .. construct_excludes(opts.excludes)
 	end
