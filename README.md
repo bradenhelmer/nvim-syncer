@@ -20,15 +20,20 @@ end
 In the directory you are syncing, create a ```sync.lua``` file with the following template:
 ```lua
 local sync_config = {
-        -- Username on remote machine
-        username = "",
-        -- Address of remote machine
+        -- Address of remote machine.
         remote_ip = "",
-        -- Destination syncing path on the remote machine
+        -- Username on remote machine, required if remote_ip specified.
+        username = "",
+        -- Destination syncing path, better if absolute path.
         dest_path = "",
-        -- Option to automatically sync on save.
+        -- Option to automatically sync on save. Required
         on_save = true
+        -- List of files to be excluded.
+        excludes = {}
+        -- List of files to read excludes from e.g .gitgnore.
+        exclude_files = {}
 }
 return sync_config
 ```
-If a ```sync.lua``` file is found in the directory the neovim user commands ```SyncUp``` and ```SyncDown``` will be registered. Otherwise none of the functionality will be available.
+If a ```sync.lua``` file is found in the directory the neovim user commands ```SyncUp``` and ```SyncDown``` will be registered. Otherwise none of the functionality will be available.<br>
+If ```sync.lua``` is edited, neovim must be reloaded.
