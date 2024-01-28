@@ -8,11 +8,9 @@ local function get_config_file()
 	if string.len(file_path) > 0 then
 		config.opts = require("sync")
 		config.opts.src_path = src_path
-		return true
+		return config
 	end
 	return false
 end
 
-if get_config_file() then
-	return config
-end
+return get_config_file()

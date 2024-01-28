@@ -3,16 +3,19 @@
 -- Core plugin implementation.
 local syncer = {}
 
+function syncer.notify_error(message)
+	vim.notify(message, vim.log.levels.ERROR)
+	return false
+end
+
 -- Ensures options are valid.
 local function validate_opts(opts)
 	if not opts.dest_path then
-		vim.api.nvim_err_writeln("No dest_path specdifed!")
-		return false
+		return syncer.notify_error("No dest_path specdifed!")
 	end
 	if opts.remote_ip then
 		if not opts.username then
-			vim.api.nvim_err_writeln("A remote ip was specified, however a username was not provided.")
-			return false
+			return syncer.notify_error("A remote ip was specified, however a username was not provided.")
 		end
 	end
 	return true
@@ -52,21 +55,25 @@ end
 -- Invokes sync job
 local function do_sync(command, opts, is_up)
 	local job = vim.fn.jobstart(command, {
-		cwd = opts.src_path
+		cwd = opts.src_path,
+		on_stderr = function(_, msg)
+			syncer.notify_error(table.concat(msg, '\n'))
+		end,
+		stderr_buffered = true
 	})
 
 	local direction = is_up and "up" or "down"
-	vim.api.nvim_out_write("Syncing " .. direction .. "...\n")
+	vim.notify("Syncing " .. direction .. "...", vim.log.levels.INFO)
 
 	if job == 0 or job == -1 then
-		vim.api.nvim_err_writeln("Error while syncing " .. direction .. "!")
+		syncer.notify_error("Error while syncing " .. direction .. "!")
 	end
 end
 
 -- Syncing upwards (host -> remote)
 function syncer.sync_up(opts)
 	if not validate_opts then
-		vim.api.nvim_err_writeln("Error with configuration options!")
+		return syncer.notify_error("Error with configuration options!")
 	end
 
 	local command = "rsync -varz "
@@ -80,8 +87,7 @@ end
 -- Syncing upwards (remote -> host)
 function syncer.sync_down(opts)
 	if not validate_opts then
-		vim.api.nvim_err_writeln("sync.lua file is missing dest_path value!")
-		return false
+		return syncer.notify_error("sync.lua file is missing dest_path value!")
 	end
 
 	local command = "rsync -varz "
