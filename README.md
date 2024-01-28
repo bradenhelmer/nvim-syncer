@@ -35,5 +35,4 @@ local sync_config = {
 }
 return sync_config
 ```
-If a ```sync.lua``` file is found in the directory the neovim user commands ```SyncUp``` and ```SyncDown``` will be registered. Otherwise none of the functionality will be available.<br>
 If ```sync.lua``` is edited, neovim must be reloaded.
