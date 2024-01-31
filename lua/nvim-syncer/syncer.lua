@@ -21,7 +21,6 @@ local function validate_opts(opts)
 	return true
 end
 
--- TODO: Implement function to construct an exclusion string for the command
 local function construct_excludes(opts)
 	local initial = ""
 	-- Files to be excluded
