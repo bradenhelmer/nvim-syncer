@@ -28,7 +28,7 @@ local sync_config = {
         dest_path = "",
         -- Option to automatically sync on save. Required
         on_save = true
-        -- List of files to be excluded.
+        -- List of files to be excluded. sync.lua is excluded by default!
         excludes = {}
         -- List of files to read excludes from e.g .gitgnore.
         exclude_files = {}
