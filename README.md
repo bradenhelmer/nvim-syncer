@@ -12,10 +12,8 @@ Use any whatever plugin manager you would like.<br>
 Example lua configuration setup:
 ```lua
 local syncer = require("nvim-syncer")
-if syncer ~= nil then
-	vim.keymap.set('n', "<leader>sd", ":SyncDown<CR>")
-	vim.keymap.set('n', "<leader>su", ":SyncUp<CR>")
-end
+vim.keymap.set('n', "<leader>sd", ":SyncDown<CR>")
+vim.keymap.set('n', "<leader>su", ":SyncUp<CR>")
 ```
 In the directory you are syncing, create a ```sync.lua``` file with the following template:
 ```lua
@@ -26,7 +24,7 @@ local sync_config = {
         username = "",
         -- Destination syncing path, better if absolute path.
         dest_path = "",
-        -- Option to automatically sync on save. Required
+        -- Option to automatically sync on save. False by defualt
         on_save = true
         -- List of files to be excluded. sync.lua is excluded by default!
         excludes = {}
