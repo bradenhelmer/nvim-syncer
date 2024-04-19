@@ -22,7 +22,7 @@ local function validate_opts(opts)
 end
 
 local function construct_excludes(opts)
-	local initial = "--exclude={'\'sync.lua\',"
+	local initial = "--exclude={\'sync.lua\',"
 	-- Files to be excluded, automatically exclude sync.lua.
 	if opts.excludes then
 		for idx, exclude in ipairs(opts.excludes) do
