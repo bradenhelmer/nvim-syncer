@@ -82,7 +82,7 @@ function syncer.sync_up(opts)
 	do_sync(command, opts, true)
 end
 
--- Syncing upwards (remote -> host)
+-- Syncing downwards (remote -> host)
 function syncer.sync_down(opts)
 	if not validate_opts then
 		return syncer.notify_error("sync.lua file is missing dest_path value!")
